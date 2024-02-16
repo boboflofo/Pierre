@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
-using Factory.Models;
+using Pierre.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Factory.Controllers
+namespace Pierre.Controllers
 {
   public class FlavorController : Controller
   {
-    private readonly FactoryContext _db;
+    private readonly PierreContext _db;
 
-    public FlavorController(FactoryContext db)
+    public FlavorController(PierreContext db)
     {
       _db = db;
     }
