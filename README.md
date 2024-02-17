@@ -44,7 +44,7 @@ $ dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore -v 6.0.0
 
 
 * Open a code editor such as VScode and in the terminal **git clone** the project for editing capabilities
-* Install dependencies for local project under the Bakery folder using command **dotnet restore**
+* Install dependencies for local project under the Pierre folder using command **dotnet restore**
 * Under the projectname folder, create a **appsettings.json** file and add 
 ```
 {
