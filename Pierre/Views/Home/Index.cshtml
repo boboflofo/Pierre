@@ -8,33 +8,41 @@
 
 <hr />
 
-<h4>Treats</h4>
-@if (Model["treats"].Length == 0)
-{
-  <p>No treats have been added yet!</p>
-} 
-<ul>
-  @foreach (Treat eng in Model["treats"])
-  {
-    <li>@Html.ActionLink(@eng.Name, "Details", "Treat", new { id = @eng.TreatId})</li>
-  }
-</ul>
-
 @if (User.Identity.IsAuthenticated)
 {
-<h4>Flavors</h4>
-@if (Model["flavors"].Length == 0)
-{
-  <p>No flavors have been added yet!</p>
-} 
-<ul>
-  @foreach (Flavor flavor in Model["flavors"])
+  <h4>Treats</h4>
+  @if (Model["treats"].Length == 0)
   {
-    <li>@Html.ActionLink(@flavor.Name, "Details", "Flavor", new { id = @flavor.FlavorId})</li>
+    <p>No treats have been added yet!</p>
   }
-</ul>
+  <ul>
+    @foreach (Treat treat in Model["treats"])
+    {
+      <li>@Html.ActionLink(@treat.Name, "Details", "Treat", new { id = @treat.TreatId })</li>
+    }
+  </ul>
 }
-else{
+else
+{
+  <h4>Treats</h4>
+  <p>Please @Html.ActionLink("log in", "LogIn", "Account") to view or manage your treats.</p>
+}
+@if (User.Identity.IsAuthenticated)
+{
+  <h4>Flavors</h4>
+  @if (Model["flavors"].Length == 0)
+  {
+    <p>No flavors have been added yet!</p>
+  }
+  <ul>
+    @foreach (Flavor flavor in Model["flavors"])
+    {
+      <li>@Html.ActionLink(@flavor.Name, "Details", "Flavor", new { id = @flavor.FlavorId })</li>
+    }
+  </ul>
+}
+else
+{
   <h4>Flavors</h4>
   <p>Please @Html.ActionLink("log in", "LogIn", "Account") to view or manage your flavors.</p>
 }

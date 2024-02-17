@@ -26,14 +26,15 @@ namespace Pierre.Controllers
     [HttpGet("/")]
     public async Task<ActionResult> Index()
     {
-      Treat[] tre = _db.Treats.ToArray();
-      Flavor[] fla = _db.Flavors.ToArray();
       Dictionary<string,object[]> model = new Dictionary<string, object[]>();
-      model.Add("treats", tre);
       string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
       if (currentUser != null)
         {
+          Treat[] treats = _db.Treats
+                      .Where(entry => entry.User.Id == currentUser.Id)
+                      .ToArray();
+          model.Add("treats", treats);
           Flavor[] flavors = _db.Flavors
                       .Where(entry => entry.User.Id == currentUser.Id)
                       .ToArray();
