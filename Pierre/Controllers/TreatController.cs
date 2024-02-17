@@ -4,9 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Pierre.Controllers
 {
+  [Authorize]
   public class TreatController : Controller
   {
     private readonly PierreContext _db;
