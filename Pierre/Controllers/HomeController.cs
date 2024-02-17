@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Pierre.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
@@ -15,14 +17,14 @@ namespace Pierre.Controllers
     private readonly PierreContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public HomeController(PierreContext db)
+    public HomeController(UserManager<ApplicationUser> userManager, PierreContext db)
     {
       _userManager = userManager;
       _db = db;
     }
 
     [HttpGet("/")]
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
       Treat[] tre = _db.Treats.ToArray();
       Flavor[] fla = _db.Flavors.ToArray();

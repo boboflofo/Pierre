@@ -23,9 +23,8 @@ namespace Pierre.Controllers
       _db = db;
     }
 
-    public ActionResult Index()
-    {
-      public async Task<ActionResult> Index()
+    
+    public async Task<ActionResult> Index()
     {
       string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
@@ -34,7 +33,7 @@ namespace Pierre.Controllers
                           .ToList();
       return View(userTreats);
     }
-    }
+    
 
     public ActionResult Details(int id)
     {
@@ -51,13 +50,13 @@ namespace Pierre.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Treat treat)
+    public async Task<ActionResult> Create(Treat treat)
     {
       if (ModelState.IsValid)
       {
         string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-        Treat.User = currentUser;
+        treat.User = currentUser;
         _db.Treats.Add(treat);
         _db.SaveChanges();
         return RedirectToAction("Index");
