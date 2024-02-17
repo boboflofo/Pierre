@@ -55,6 +55,9 @@ namespace Pierre.Controllers
     {
       if (ModelState.IsValid)
       {
+        string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+        Treat.User = currentUser;
         _db.Treats.Add(treat);
         _db.SaveChanges();
         return RedirectToAction("Index");
